@@ -22,6 +22,10 @@ public class FamilyTree {
         System.out.println(name + " Person Added");
     }
 
+    /**
+     * Adds a relationship type to the family tree.
+     * @param relation relationship
+     */
     public void addRelationship(String relation) {
         relation = relation.toLowerCase();
         switch (relation) {
@@ -43,11 +47,18 @@ public class FamilyTree {
                 relationshipHandlerMap.put("daughters", new FatherDaughterRelationshipHandler());
                 break;
             default:
-               break;
+                System.out.println("ERR07 - Invalid Relation ship");
+                return;
         }
         System.out.println(relation + " Relation Added");
     }
 
+    /**
+     * Connects two persons based on a specified relationship.
+     * @param name1 - Person1 name
+     * @param name2 - Person2 name
+     * @param relation - relationship b/w two person
+     */
     public void connectPerson(String name1, String name2, String relation) {
         Person person1 = connectionMap.get(name1);
         Person person2 = connectionMap.get(name2);
@@ -65,6 +76,11 @@ public class FamilyTree {
         }
     }
 
+    /**
+     * Counts the number of sons for a person.
+     * @param name - Name of person
+     * @return number of sons
+     */
     public int countSons(String name) {
         Person person = connectionMap.get(name);
         if (person != null) {
@@ -75,6 +91,11 @@ public class FamilyTree {
         return 0;
     }
 
+    /**
+     * Counts the number of daughters for a person.
+     * @param name - Name of person
+     * @return number of daughters
+     */
     public int countDaughters(String name) {
         Person person = connectionMap.get(name);
         if (person != null) {
@@ -85,6 +106,11 @@ public class FamilyTree {
         return 0;
     }
 
+    /**
+     * Counts the number of wives for a person.
+     * @param name - Name of person
+     * @return number of wives
+     */
     public int countWives(String name) {
         Person person = connectionMap.get(name);
         if (person != null) {
@@ -93,6 +119,11 @@ public class FamilyTree {
         return 0;
     }
 
+    /**
+     * Print Family member details for specified relationship
+     * @param name - Name of person
+     * @param relation - Relationship
+     */
     public void showFamMembers(String name, String relation) {
         Person person = connectionMap.get(name);
         RelationshipHandler handler = relationshipHandlerMap.get(relation.toLowerCase());
